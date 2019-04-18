@@ -15,9 +15,6 @@ public class TestPen {
     private double sizeLetter = 1;
     private String color = "RED";
     private String path = "..\\testPen\\temp.txt";
-    private String fieldInkContainerValue = "inkContainerValue";
-    private String fieldSizeLetter = "sizeLetter";
-    private String fieldColor = "color";
 
     //Test proveryaet polnotu napisaniya slova v zavisimosti ot koli4estva 4ernil v ru4ke
     @Test (dataProvider = "inkContainerValue", dataProviderClass = DataProviders.class)
@@ -78,9 +75,9 @@ public class TestPen {
     }
 
     //Dalee 3 testa constructorov classa Pen
-
+    @Parameters ({"fieldInkContainerValue"})
     @Test
-    public void testConstructorWithIntCV() throws NoSuchFieldException, IllegalAccessException {
+    public void testConstructorWithIntCV(String fieldInkContainerValue) throws NoSuchFieldException, IllegalAccessException {
         pen = new Pen(inkCV);
         Field field = Pen.class.getDeclaredField(fieldInkContainerValue);
         field.setAccessible(true);
@@ -88,8 +85,9 @@ public class TestPen {
         Assert.assertEquals(actual, inkCV);
     }
 
+    @Parameters({"fieldSizeLetter"})
     @Test
-    public void testConstructorWithSize() throws NoSuchFieldException, IllegalAccessException {
+    public void testConstructorWithSize(String fieldSizeLetter) throws NoSuchFieldException, IllegalAccessException {
         pen = new Pen(inkCV, sizeLetter);
         Field field = Pen.class.getDeclaredField(fieldSizeLetter);
         field.setAccessible(true);
@@ -97,8 +95,9 @@ public class TestPen {
         Assert.assertEquals(actual, sizeLetter);
     }
 
+    @Parameters({"fieldColor"})
     @Test
-    public void testConstructorWithColor() throws NoSuchFieldException, IllegalAccessException {
+    public void testConstructorWithColor(String fieldColor) throws NoSuchFieldException, IllegalAccessException {
         pen = new Pen(inkCV, sizeLetter, color);
         Field field = Pen.class.getDeclaredField(fieldColor);
         field.setAccessible(true);
