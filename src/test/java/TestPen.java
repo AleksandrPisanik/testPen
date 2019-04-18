@@ -19,6 +19,7 @@ public class TestPen {
     private String fieldSizeLetter = "sizeLetter";
     private String fieldColor = "color";
 
+    //Test proveryaet polnotu napisaniya slova v zavisimosti ot koli4estva 4ernil v ru4ke
     @Test (dataProvider = "inkContainerValue", dataProviderClass = DataProviders.class)
     public void testWrite_different_inkContainerValue(int inkCV, String expected) {
         pen = new Pen(inkCV);
@@ -26,6 +27,7 @@ public class TestPen {
         Assert.assertEquals(actual, expected);
     }
 
+    //Test proveryaet polnotu napisaniya slova v zavisimosti ot razmera bukw v slowe
     @Test (dataProvider = "sizeLetter", dataProviderClass = DataProviders.class)
     public void testWrite_different_sizeLetter(int inkCV, double sizeLetter, String expected) {
         String actual;
@@ -38,6 +40,7 @@ public class TestPen {
         Assert.assertEquals(actual,expected);
     }
 
+    //Test - proverka gettera
     @Test
     public void testGetColor (){
         pen = new Pen(inkCV, sizeLetter, color);
@@ -45,6 +48,7 @@ public class TestPen {
         Assert.assertEquals(actual, color);
     }
 
+    //Test proveryaet napisanie slova v zavisimosti ot cweta ru4ki
     @Test (dataProvider = "colors", dataProviderClass = DataProviders.class)
     public void testWrite_setColor(int inkCV, double sizeLetter, String color, String expected){
         pen = new Pen(inkCV, sizeLetter, color);
@@ -52,6 +56,7 @@ public class TestPen {
         Assert.assertEquals(actual, expected);
     }
 
+    //Test proveryaet rabotu metoda isWork
     @Test (dataProvider = "isWork", dataProviderClass = DataProviders.class)
     public void testIsWork(int inkCV, boolean expected){
         pen = new Pen(inkCV);
@@ -59,6 +64,7 @@ public class TestPen {
         Assert.assertEquals(actual, expected);
     }
 
+    //Test perenapravlyaet potok vyvoda v fail i sravnivaet stroku faila s polem color
     @Test
     public void testDoSomethingElse() throws IOException {
         pen = new Pen(inkCV, sizeLetter, color);
@@ -70,6 +76,8 @@ public class TestPen {
         Assert.assertEquals(Files.readAllLines(Paths.get(file.toURI())).get(0), color);
         System.setOut(standardOut);
     }
+
+    //Dalee 3 testa constructorov classa Pen
 
     @Test
     public void testConstructorWithIntCV() throws NoSuchFieldException, IllegalAccessException {
